@@ -1,0 +1,32 @@
+services:
+  termix:
+    image: ghcr.io/lukegus/termix
+    container_name: termix
+    restart: unless-stopped
+    volumes:
+      - ${TERMIX_DATA_FOLDER:-./data}:/app/data
+    environment:
+      GUACD_HOST: guacd
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      HTTPS_PROXY: ${TERMIX_EXTERNAL_URL}
+    depends_on:
+      - guacd
+    networks:
+      local:
+      external:
+        ipv4_address: ${TERMIX_IP_ADDRESS}
+
+  guacd:
+    image: guacamole/guacd
+    container_name: guacd
+    restart: unless-stopped
+    networks:
+      local:
+
+networks:
+  local:
+    name: termix-local-network
+  external:
+    external: true
+    name: ${EXTERNAL_NETWORK_NAME}
