@@ -4,29 +4,24 @@ services:
     container_name: termix
     restart: unless-stopped
     volumes:
-      - ${TERMIX_DATA_FOLDER:-./data}:/app/data
+      - ./data:/app/data
     environment:
+      PORT: 8080
       GUACD_HOST: guacd
-      PUID: ${PUID:-1000}
-      PGID: ${PGID:-1000}
-      HTTPS_PROXY: ${TERMIX_EXTERNAL_URL}
     depends_on:
       - guacd
+    ports:
+      - "${TERMIX_PORT:-8080}:8080"
     networks:
-      local:
-      external:
-        ipv4_address: ${TERMIX_IP_ADDRESS}
+      net:
 
   guacd:
     image: guacamole/guacd
     container_name: guacd
     restart: unless-stopped
     networks:
-      local:
+      net:
 
 networks:
-  local:
+  net:
     name: termix-local-network
-  external:
-    external: true
-    name: ${EXTERNAL_NETWORK_NAME}
