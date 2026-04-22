@@ -4,7 +4,7 @@ services:
     container_name: termix
     restart: unless-stopped
     volumes:
-      - ./data:/app/data
+      - ${TERMIX_DATA_FOLDER:-./data}:/app/data
     environment:
       PORT: 8080
       GUACD_HOST: guacd
