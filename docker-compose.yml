@@ -4,14 +4,14 @@ services:
     container_name: termix
     restart: unless-stopped
     volumes:
-      - ${TERMIX_DATA_FOLDER:-./data}:/app/data
+      - ./data:/app/data
     environment:
       PORT: 8080
       GUACD_HOST: guacd
     depends_on:
       - guacd
     ports:
-      - "${TERMIX_PORT:-8080}:8080"
+      - '8080:8080'
     networks:
       net:
 
