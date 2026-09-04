@@ -1,1 +1,1 @@
-# termix-docker
+# Termix
