@@ -24,7 +24,7 @@ services:
 
 networks:
   local:
-    name: homarr-local-network
+    name: termix-local-network
     ipam:
       config:
         - subnet: 172.${SUBNET_NUMBER:-20}.0.0/16

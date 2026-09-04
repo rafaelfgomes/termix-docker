@@ -17,7 +17,7 @@ services:
         ipv4_address: 172.${SUBNET_NUMBER:-20}.0.2
 
   guacd:
-    image: guacamole/guacd
+    image: guacamole/guacd:1.6.0
     container_name: guacd
     restart: unless-stopped
     networks:
@@ -29,7 +29,7 @@ networks:
     external: true
     name: ${EXTERNAL_NETWORK_NAME}
   local:
-    name: homarr-local-network
+    name: termix-local-network
     ipam:
       config:
         - subnet: 172.${SUBNET_NUMBER:-20}.0.0/16
